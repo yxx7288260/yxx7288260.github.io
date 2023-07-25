@@ -1,75 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>打开网址</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #f2f2f2;
-			margin: 0;
-			padding: 0;
-		}
-		h1 {
-			font-size: 24px;
-			margin-top: 20px;
-			margin-bottom: 10px;
-		}
-		label {
-			display: block;
-			margin-bottom: 5px;
-			font-size: 16px;
-			font-weight: bold;
-		}
-		textarea {
-			width: 100%;
-			height: 200px;
-			padding: 5px;
-			font-size: 16px;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			resize: none;
-		}
-		button {
-			padding: 10px 20px;
-			font-size: 16px;
-			font-weight: bold;
-			background-color: #4CAF50;
-			color: #fff;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			margin-top: 10px;
-			transition: background-color 0.3s ease;
-		}
-		button:hover {
-			background-color: #3E8E41;
-		}
-	</style>
-</head>
-<body>
-	<h1>打开网址</h1>
-	<label for="urls">请输入网址（每行一个）：</label>
-	<textarea id="urls"></textarea>
-	<button id="start-btn">开始</button>
-
-	<script>
-		document.getElementById("start-btn").addEventListener("click", function() {
-			var urls = document.getElementById("urls").value.trim().split("\n");
-			var progress = 0;
-			var interval = setInterval(function() {
-				if (progress === urls.length) {
-					clearInterval(interval);
-					return;
-				}
-
-				var url = urls[progress];
-				var query = progress === 0 ? "?进度=0%" : "?打开进度=" + Math.floor((progress / urls.length) * 100) + "%";
-				var tab = window.open(url + query, "_blank");
-				tab.focus();
-
-				progress++;
-			}, 5500);
-		});
-	</script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Open URLs with Progress</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        resize: none;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #4285f4;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #357ae8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Open URLs with Progress</h1>
+      <label for="urls">Enter URLs (one per line)</label>
+      <textarea id="urls" placeholder="https://www.ebay.com/itm/385721838516&#10;https://www.ebay.com/itm/364333825567&#10;https://www.ebay.com/itm/314686454551&#10;https://www.ebay.com/itm/266321086874&#10;https://www.ebay.com/itm/354880959918&#10;https://www.ebay.com/itm/126006690062"></textarea>
+      <button id="start-btn">Start</button>
+      <div id="progress"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
