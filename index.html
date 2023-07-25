@@ -2,14 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Open URLs</title>
+    <title>打开网址</title>
   </head>
   <body>
-    <h1>Enter URLs to open:</h1>
     <textarea id="urls" rows="10" cols="50"></textarea>
     <br>
-    <button id="start-button">Start</button>
-    <h2>Opening progress: <span id="progress">0%</span></h2>
-    <script src="./script.js"></script>
+    <button id="start">开始</button>
+    <script>
+      const startButton = document.getElementById('start');
+      startButton.addEventListener('click', function() {
+        const urls = document.getElementById('urls').value.split('\n');
+        let currentIndex = 0;
+        const intervalId = setInterval(function() {
+          if (currentIndex >= urls.length) {
+            clearInterval(intervalId);
+          } else {
+            const url = urls[currentIndex];
+            const progress = currentIndex === 0 ? '0' : ((currentIndex + 1) / urls.length * 100).toFixed(0);
+            const openUrl = url + `?打开进度=${progress}%`;
+            window.open(openUrl, '_blank');
+            currentIndex++;
+          }
+        }, 5500);
+      });
+    </script>
   </body>
 </html>
