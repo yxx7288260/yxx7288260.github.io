@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>打开网址</title>
+</head>
+<body>
+	<label for="urls">输入网址（每行一个）：</label>
+	<br>
+	<textarea id="urls" rows="15" cols="80"></textarea>
+	<br>
+	<button id="startBtn">开始</button>
+
+	<script type="text/javascript">
+		var startBtn = document.getElementById("startBtn");
+		var urlsTextarea = document.getElementById("urls");
+
+		startBtn.onclick = function() {
+			var urls = urlsTextarea.value.split('\n').filter(url => url.trim() !== '');
+			if (urls.length > 0) {
+				openUrls(urls);
+			} else {
+				alert("请至少输入一个网址！");
+			}
+		};
+
+		function openUrls(urls) {
+			var i = 0;
+			var interval = setInterval(function() {
+				if (i >= urls.length) {
+					clearInterval(interval);
+					alert("已完成！");
+					return;
+				}
+				var url = urls[i];
+				var tab = window.open(url, '_blank');
+				setTimeout(function() {
+					var loadingSpan = tab.document.getElementById("loading-span");
+					if (loadingSpan) {
+						var loadingTime = parseFloat(loadingSpan.textContent);
+						var percentage = Math.floor(loadingTime / 10 * 100);
+						if (percentage > 100) {
+							percentage = 100;
+						}
+						tab.document.title = percentage + "% - " + tab.document.title;
+					}
+				}, 5500);
+				i++;
+			}, 5500);
+		}
+	</script>
+</body>
+</html>
