@@ -19,12 +19,17 @@ startBtn.addEventListener("click", () => {
     for (const url of urls) {
         setTimeout(() => {
             window.open(url, "_blank");
-            count++;
-            const percentage = Math.floor((count / total) * 100);
-            document.title = `(${percentage}%) Open eBay URLs`;
-            if (count === total) {
-                startBtn.disabled = false;
-            }
+            const checkTab = setInterval(() => {
+                if (document.hidden) {
+                    clearInterval(checkTab);
+                    count++;
+                    const percentage = Math.floor((count / total) * 100);
+                    document.title = `(${percentage}%) Open eBay URLs (${count}/${total})`;
+                    if (count === total) {
+                        startBtn.disabled = false;
+                    }
+                }
+            }, 1000);
         }, interval * count);
     }
 });

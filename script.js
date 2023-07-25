@@ -15,13 +15,16 @@ startBtn.addEventListener("click", async () => {
     for (const url of urls) {
         await new Promise(resolve => setTimeout(resolve, interval));
         const tab = window.open(url, "_blank");
-        tab.addEventListener("load", () => {
-            count++;
-            const percentage = Math.floor((count / total) * 100);
-            progressDiv.textContent = `${percentage}%`;
-            if (count === total) {
-                startBtn.disabled = false;
+        const checkTab = setInterval(() => {
+            if (tab.closed) {
+                clearInterval(checkTab);
+                count++;
+                const percentage = Math.floor((count / total) * 100);
+                progressDiv.textContent = `${percentage}%`;
+                if (count === total) {
+                    startBtn.disabled = false;
+                }
             }
-        });
+        }, 1000);
     }
 });
