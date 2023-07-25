@@ -1,30 +1,39 @@
+// Get the start button and the URLs textarea
+const startButton = document.getElementById("start-button");
 const urlsTextarea = document.getElementById("urls");
-const startBtn = document.getElementById("start-btn");
-const progressDiv = document.getElementById("progress");
 
-startBtn.addEventListener("click", async () => {
-    const urls = urlsTextarea.value.trim().split(/\s+/);
-    if (!urls.length) return;
-    startBtn.disabled = true;
-    progressDiv.textContent = "0%";
+// Add a click event listener to the start button
+startButton.addEventListener("click", () => {
+  // Get the URLs from the textarea
+  const urls = urlsTextarea.value.split("\n").filter(url => url.trim() !== "");
 
-    const interval = 5500; // in milliseconds
-    const total = urls.length;
-    let count = 0;
+  // Initialize the progress to 0%
+  let progress = 0;
+  updateProgress(progress);
 
-    for (const url of urls) {
-        await new Promise(resolve => setTimeout(resolve, interval));
-        const tab = window.open(url, "_blank");
-        const checkTab = setInterval(() => {
-            if (tab.closed) {
-                clearInterval(checkTab);
-                count++;
-                const percentage = Math.floor((count / total) * 100);
-                progressDiv.textContent = `${percentage}%`;
-                if (count === total) {
-                    startBtn.disabled = false;
-                }
-            }
-        }, 1000);
-    }
+  // Loop through the URLs and open them one by one
+  for (let i = 0; i < urls.length; i++) {
+    setTimeout(() => {
+      // Open the URL in a new tab
+      const tab = window.open(urls[i], "_blank");
+
+      // Check if the tab is focused every 100ms
+      const interval = setInterval(() => {
+        if (tab && tab.document && tab.document.readyState === "complete") {
+          clearInterval(interval);
+
+          // Update the progress
+          progress += 100 / urls.length;
+          updateProgress(progress);
+        }
+      }, 100);
+    }, i * 5500); // Open each URL every 5.5 seconds
+  }
 });
+
+// Helper function to update the progress
+function updateProgress(progress) {
+  const progressSpan = document.getElementById("progress");
+  progressSpan.textContent = `${Math.round(progress)}%`;
+  document.title = `Opening URLs (${Math.round(progress)}%)`;
+}

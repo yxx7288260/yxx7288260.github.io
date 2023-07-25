@@ -1,39 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Open eBay URLs</title>
-	<style>
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 50px;
-		}
-		textarea {
-			height: 300px;
-			width: 500px;
-			padding: 10px;
-			margin-bottom: 20px;
-			resize: none;
-		}
-		button {
-			padding: 10px 20px;
-			font-size: 16px;
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-	</style>
-</head>
-<body>
-	<div class="container">
-		<h1>Enter eBay URLs:</h1>
-		<textarea id="urls"></textarea>
-		<button id="start-btn">Start</button>
-		<div id="progress"></div>
-	</div>
-	<script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Open URLs</title>
+  </head>
+  <body>
+    <h1>Enter URLs to open:</h1>
+    <textarea id="urls" rows="10" cols="50"></textarea>
+    <br>
+    <button id="start-button">Start</button>
+    <h2>Opening progress: <span id="progress">0%</span></h2>
+    <script src="./script.js"></script>
+  </body>
 </html>
