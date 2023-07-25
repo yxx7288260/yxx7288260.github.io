@@ -2,58 +2,48 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Open URLs with Progress</title>
+    <title>打开网址</title>
     <style>
       body {
-        background-color: #f2f2f2;
-        font-family: sans-serif;
+        font-family: Arial, sans-serif;
+        background-color: #eee;
+        margin: 0;
+        padding: 0;
       }
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      h1 {
+        text-align: center;
+        margin-top: 50px;
       }
-      label {
-        display: block;
-        margin-bottom: 10px;
-      }
-      textarea {
-        width: 100%;
+      #urls {
+        width: 80%;
         height: 200px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
+        margin: 0 auto;
+        display: block;
         resize: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 10px;
       }
-      button {
+      #start-btn {
         display: block;
         margin: 20px auto;
         padding: 10px 20px;
-        background-color: #4285f4;
+        font-size: 18px;
+        background-color: #007bff;
         color: #fff;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
         cursor: pointer;
       }
-      button:hover {
-        background-color: #357ae8;
+      #start-btn:hover {
+        background-color: #0069d9;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Open URLs with Progress</h1>
-      <label for="urls">Enter URLs (one per line)</label>
-      <textarea id="urls" placeholder="https://www.ebay.com/itm/385721838516&#10;https://www.ebay.com/itm/364333825567&#10;https://www.ebay.com/itm/314686454551&#10;https://www.ebay.com/itm/266321086874&#10;https://www.ebay.com/itm/354880959918&#10;https://www.ebay.com/itm/126006690062"></textarea>
-      <button id="start-btn">Start</button>
-      <div id="progress"></div>
-    </div>
-    <script src="script.js"></script>
+    <h1>打开网址</h1>
+    <textarea id="urls" placeholder="在此处输入网址"></textarea>
+    <button id="start-btn">开始</button>
+    <script src="open_urls.js"></script>
   </body>
 </html>
